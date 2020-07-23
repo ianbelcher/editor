@@ -72,19 +72,13 @@ export class ApiStyleStore {
 
   // Save current style replacing previous version
   save(mapStyle) {
-    const styleJSON = format(
-      style.stripAccessTokens(
-        style.replaceAccessTokens(mapStyle)
-      )
-    );
-
     fetch(`${this.apiUrl}/${mapStyle.id}`, {
       method: "PUT",
       mode: 'cors',
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
-      body: styleJSON
+      body: JSON.stringify(mapStyle)
     })
     .catch(function(error) {
       if(error) console.error(error)
